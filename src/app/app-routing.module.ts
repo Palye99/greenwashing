@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import {LoginComponent} from './components/login/login.component';
 import {HomeComponent} from './components/home/home.component';
-import {TerminalComponent} from './components/terminal/terminal.component';
 import {RegisterComponent} from './components/register/register.component';
 import {PasswordComponent} from './components/password/password.component';
 import {AuthGuard} from './services/guard/auth.guard';
@@ -33,11 +32,6 @@ const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'terminal',
-        component: TerminalComponent,
         canActivate: [AuthGuard]
     }
 ];
