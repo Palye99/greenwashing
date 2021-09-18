@@ -10,7 +10,7 @@ import {EmailComponent} from './components/email/email.component';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '/login',
+        redirectTo: '/home',
         pathMatch: 'full'
     },
     {
@@ -32,7 +32,6 @@ const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent,
-        canActivate: [AuthGuard]
     }
 ];
 
