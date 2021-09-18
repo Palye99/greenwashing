@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Thank You for Registering</h2>
+  </div>
+
+  <div class="card-body">
+
+    <div class="row" *ngIf="user">
+      <p class="text-center">We have sent a confirmation email to <strong>{{user.email}}</strong>.</p>
+      <p class="text-center">Please check your email and click on the link to verfiy your email address.</p>
+    </div>
+
+    <div class="row">
+      <div class="col">
+      <button type="button" class="btn btn-primary" id="btn-resent-email" (click)="sendVerificationEmail()">
+        <i class="fas fa-redo-alt"></i>
+        Resend Verification Email
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="card-footer">
+  <button type="button" routerLink="/login" class="btn btn-info">Sign in</button>
+</div>
+</div>

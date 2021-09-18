@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand navbar-light bg-light" aria-label="Second navbar example">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/home">
+      <img src="assets/logo.ico" alt="logo" class="d-inline-block align-text-top">
+      MyFavoriteCode
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Projet</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Equipe</a>
+        </li>
+      </ul>
+      <div>
+        <button class="btn btn-secondary" (click)="userInfo()"><i class="fas fa-user-tag"></i></button>
+        <button class="btn btn-secondary" (click)="signOut()"><i class="fas fa-sign-out-alt"></i></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm test" (click)="choice(1)">
+      <img src="assets/java.svg" alt="java_logo" style="width: 50%">
+    </div>
+    <div class="col-sm test" (click)="choice(2)">
+      <img src="assets/javascript.svg" alt="javascript_logo">
+    </div>
+    <div class="col-sm test" (click)="choice(3)">
+      <img src="assets/bash-icon.svg" alt="bash_logo">
+    </div>
+    <div class="col-sm test" (click)="choice(4)">
+      <img src="assets/python.svg" alt="python_logo">
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5 border-dark">
+  <mat-tab-group *ngIf="containerJava || containerJS || containerBash || containerPython">
+
+    <mat-tab label="Java" *ngIf="containerJava">
+      <app-terminal [container]="containerJava" [isLoading]="isLoadingJava"
+                    [firstCommande]="resultCommandJava" [firstError]="errorCommandeJava"
+                    [choixTerm]="1"></app-terminal>
+      <div *ngIf="errorJava" class="alert alert-danger" role="alert">Erreur lors du lancement du container</div>
+      <div *ngIf="errorCommandeJava && errorCommandeJava.length > 0" class="alert alert-warning" role="alert">{{errorCommandeJava}}</div>
+    </mat-tab>
+
+    <mat-tab label="JavaScript" *ngIf="containerJS">
+      <app-terminal [container]="containerJS" [isLoading]="isLoadingJS"
+                    [firstCommande]="resultCommandJS" [firstError]="errorCommandeJS"
+                    [choixTerm]="2"></app-terminal>
+      <div *ngIf="errorJS" class="alert alert-danger" role="alert">Erreur lors du lancement du container</div>
+      <div *ngIf="errorCommandeJS && errorCommandeJS.length > 0" class="alert alert-warning" role="alert">{{errorCommandeJS}}</div>
+    </mat-tab>
+
+    <mat-tab label="Bash" *ngIf="containerBash">
+      <app-terminal [container]="containerBash" [isLoading]="isLoadingBash"
+                    [firstCommande]="resultCommandBash" [firstError]="errorCommandeBash"
+                    [choixTerm]="3"></app-terminal>
+      <div *ngIf="errorBash" class="alert alert-danger" role="alert">Erreur lors du lancement du container</div>
+      <div *ngIf="errorCommandeBash && errorCommandeBash.length > 0" class="alert alert-warning" role="alert">{{errorCommandeBash}}</div>
+    </mat-tab>
+
+    <mat-tab label="Python" *ngIf="containerPython">
+      <app-terminal [container]="containerPython" [isLoading]="isLoadingPython"
+                    [firstCommande]="resultCommandPython" [firstError]="errorCommandePython"
+                    [choixTerm]="4"></app-terminal>
+      <div *ngIf="errorPython" class="alert alert-danger" role="alert">Erreur lors du lancement du container</div>
+      <div *ngIf="errorCommandePython && errorCommandePython.length > 0" class="alert alert-warning" role="alert">{{errorCommandePython}}</div>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

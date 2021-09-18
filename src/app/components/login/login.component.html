@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Sign In</h2>
+  </div>
+
+  <div class="card-body">
+
+    <div class="row">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <img src="assets/person.svg" alt="person_logo">
+        </span>
+        <input type="text" class="form-control" [(ngModel)]="name" placeholder="Username" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon2">
+          <img src="assets/key.svg" alt="person_logo">
+        </span>
+        <input type="text" class="form-control" [(ngModel)]="password" placeholder="Password" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button type="button" class="btn btn-primary m-1 btn-login" id="btn-login" (click)="signIn()">Log in</button>
+      </div>
+      <div class="col">
+        <button type="button" routerLink="/password" class="btn btn-secondary btn-login" id="btn-forgot-password">Forgot Password ?</button>
+      </div>
+    </div>
+    <div class="row">
+      <button type="button" class="btn btn-primary btn-login" (click)="signInGoogle()">
+        <i class="fab fa-google"></i>
+        Log in with Google
+      </button>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <button type="button" routerLink="/register" class="btn btn-info btn-login">Sign Up</button>
+  </div>
+</div>

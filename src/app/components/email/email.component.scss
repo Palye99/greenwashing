@@ -1,0 +1,22 @@
+$btn-info-color: #0a58ca;
+
+.card {
+  width: 20rem;
+  padding-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#btn-resent-email {
+  margin-left: 12%;
+}
+
+.card-footer {
+  text-align: center;
+}
+
+.btn-info {
+  color: white;
+  background-color: $btn-info-color;
+  border-color: $btn-info-color;
+}

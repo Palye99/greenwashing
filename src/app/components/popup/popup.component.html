@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>User information</h1>
+<div mat-dialog-content>
+  <div *ngIf="user">
+    <h3>{{user.displayName}}</h3>
+    <p>User ID: {{user.uid}}</p>
+    <p>Email: {{user.email}}</p>
+    <p>Email Verified: {{user.emailVerified}}</p>
+  </div>
+  <div *ngIf="!user">Erreur de connection</div>
+</div>
+<div mat-dialog-actions>
+  <button type="button" class="btn btn-primary" (click)="onNoClick()">Ok</button>
+</div>

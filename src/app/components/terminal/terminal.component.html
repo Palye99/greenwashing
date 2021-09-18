@@ -1,0 +1,4 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<ng-terminal *ngIf="!isLoading || choixTerm == 1" #term [dataSource]="writeSubject" (keyInput)="onKeyInput($event)" [displayOption]="displayOptionBounded"
+             [ngClass]="{'ng-terminal': (displayOption.activateDraggableOnEdge == undefined && displayOption.fixedGrid == undefined)}">
+</ng-terminal>
