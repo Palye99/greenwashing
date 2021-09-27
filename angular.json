@@ -7,7 +7,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "pim-front": {
+    "greenwashing": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/pim-front",
+            "outputPath": "dist/greenwashing",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -67,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "pim-front:build"
+            "browserTarget": "greenwashing:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "pim-front:build:production"
+              "browserTarget": "greenwashing:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pim-front:build"
+            "browserTarget": "greenwashing:build"
           }
         },
         "test": {
@@ -122,11 +122,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "pim-front:serve"
+            "devServerTarget": "greenwashing:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "pim-front:serve:production"
+              "devServerTarget": "greenwashing:serve:production"
             }
           }
         }
@@ -138,5 +138,5 @@
       "styleext": "scss"
     }
   },
-  "defaultProject": "pim-front"
+  "defaultProject": "greenwashing"
 }
