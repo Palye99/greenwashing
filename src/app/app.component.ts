@@ -7,7 +7,7 @@ import {Container, Main} from 'tsparticles';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'pim-front';
+  title = 'greenwashing';
 
   id = 'tsparticles';
   particlesOptions = {
@@ -47,10 +47,10 @@ export class AppComponent {
     },
     particles: {
       color: {
-        value: '#000000'
+        value: '#088815'
       },
       links: {
-        color: '#000000',
+        color: '#088815',
         distance: 150,
         enable: true,
         opacity: 0.5,
