@@ -1,18 +1,31 @@
-.container  {
-  background-color: white;
-  vertical-align: middle;
-}
-
-.test {
-  display: flex;
-  justify-content: center;
-}
-
 #mapid {
-  height: 600px;
+  height: 60vh;
   width: 100%
 }
 
 #logo {
-  width: 5%;
+  width: 8%;
+  margin-left: 5px;
+}
+
+.container  {
+  margin-top: 5px;
+}
+
+.btn-navbar {
+  margin-right: 5px;
+}
+
+#action-block {
+  width: 100%;
+}
+
+.action {
+  margin-top: 5px;
+  margin-left: 5px;
+  float: right;
+}
+
+.form-control {
+  width: 25%;
 }
