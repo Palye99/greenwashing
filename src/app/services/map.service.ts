@@ -14,4 +14,8 @@ export class MapService {
     return this.http.post(`${environment.env_api_url}/map/addMarker`, m);
   }
 
+  allMarker() {
+    return this.http.get(`${environment.env_api_url}/map/allMarker`);
+  }
+
 }
