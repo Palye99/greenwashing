@@ -1,17 +1,37 @@
-<h1 mat-dialog-title>Hi</h1>
-<div mat-dialog-content>
-  name
-  <input type="text">
-  desc
-  <input type="text">
-  Coordonnée
-  <input type="text" disabled [value]="marker.lat">
-  <input type="text" disabled [value]="marker.lng">
-  Photo
-  <input type="file" disabled>
+<h1 mat-dialog-title>
+  Hej hej :)
+</h1>
+<div class="row">
+  <div class="col-md-2">
+    Name
+  </div>
+  <div class="col-md-4">
+    <input type="text">
+  </div>
+  <div class="col-md-2">
+    Coordinate
+  </div>
+  <div class="col-md-4">
+    <input type="text" disabled [value]="marker.lat">
+    <input type="text" disabled [value]="marker.lng">
+  </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button (click)="closeDialog()">Ok</button>
+<div class="row">
+  <div class="col-md-2">
+    Description
+  </div>
+  <div class="col-md-4">
+    <input type="text">
+  </div>
+  <div class="col-md-6">
+    <div class="input-group mb-3">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input">
+      </div>
+    </div>
+  </div>
 </div>
-
+<div mat-dialog-actions id="box-btn-add-marker">
+  <button mat-button class="btn btn-outline-secondary btn-add-marker" (click)="onNoClick()">No thanks</button>
+  <button mat-button class="btn btn-outline-secondary btn-add-marker" (click)="closeDialog()">Ok</button>
+</div>
