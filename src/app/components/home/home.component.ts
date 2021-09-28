@@ -77,6 +77,13 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
     if (this.authService && this.authService.userData) {
       this.user = this.authService.userData;
     }
+
+    this.mapService.allMarker().subscribe((value: Marker[]) => {
+      console.log(value);
+      value.forEach(m => {
+        L.marker([parseFloat(m.lat), parseFloat(m.lng)], {icon: this.leafIcon}).addTo(this.mymap);
+      });
+    });
   }
 
 
