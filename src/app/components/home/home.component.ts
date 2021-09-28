@@ -1,14 +1,13 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../services/auth';
 import {User} from '../../models/user';
-import {Marker} from '../../models/Marker';
+import {Marker} from '../../models/marker';
 import {MatDialog} from '@angular/material/dialog';
 import {PopupComponent} from '../popup/popup.component';
 import {DestroyedDirective} from '../../services/destroyed.directive';
 
 import * as L from 'leaflet';
 import {MapService} from "../../services/map.service";
-import {Image} from "../../models/image";
 
 @Component({
   selector: 'app-home',
