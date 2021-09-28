@@ -113,22 +113,26 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
       const ref = this.dialog.open(AddMarkerComponent);
       ref.componentInstance.tmpMarker = this.tmpMarker;
 
-      // L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
-      this.alertSuccess.nativeElement.classList.add('show');
+      ref.afterClosed().subscribe(result => {
+        if(result) {
+          L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
+          this.alertSuccess.nativeElement.classList.add('show');
 
-      const m: Marker = {
-        id: null,
-        name: 'test',
-        desc: 'test',
-        lat: this.tmpMarker.lat,
-        lng: this.tmpMarker.lng,
-        image: null,
-        user: null
-      }
+          const m: Marker = {
+            id: null,
+            name: 'test',
+            desc: 'test',
+            lat: this.tmpMarker.lat,
+            lng: this.tmpMarker.lng,
+            image: null,
+            user: null
+          }
 
-      console.log(m);
+          console.log(m);
 
-      this.mapService.addMarker(m).subscribe(value => console.log(value));
+          this.mapService.addMarker(m).subscribe(value => console.log(value));
+        }
+      });
     } else {
       this.alertError.nativeElement.classList.add('show');
     }
