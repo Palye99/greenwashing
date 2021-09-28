@@ -11,7 +11,10 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   registerUser(user: UserGreen) {
-    console.log('send register', user);
     return this.http.post(`${environment.env_api_url}/user/register`, user);
+  }
+
+  getUser(email: string) {
+    return this.http.get(`${environment.env_api_url}/user/getUserWithEmail/${email}`);
   }
 }

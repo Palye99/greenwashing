@@ -9,6 +9,8 @@ import {DestroyedDirective} from '../../services/destroyed.directive';
 import * as L from 'leaflet';
 import {MapService} from "../../services/map.service";
 import {AddMarkerComponent} from "../add-marker/add-marker.component";
+import {UserService} from "../../services/user.service";
+import {UserGreen} from "../../models/userGreen";
 
 @Component({
   selector: 'app-home',
@@ -21,6 +23,7 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
   @ViewChild('alertError', { static: true }) alertError: ElementRef;
 
   user: User;
+  userGreen: UserGreen;
   mymap: any;
   tmpMarker: any;
   leafIcon = L.icon({
@@ -34,6 +37,7 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
   constructor(private authService: AuthService,
               private mapService: MapService,
+              private userService: UserService,
               private dialog: MatDialog) {
     super();
   }
@@ -77,6 +81,7 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
     if (this.authService && this.authService.userData) {
       this.user = this.authService.userData;
+      this.userService.getUser(this.user.email).subscribe((value: UserGreen) => this.userGreen = value);
     }
 
     this.mapService.allMarker().subscribe((value: Marker[]) => {
