@@ -1,4 +1,4 @@
-<audio controls autoplay>
+<audio controls autoplay muted *ngIf="!user">
   <source src="./assets/bandol.mp3" type="audio/mpeg">
 </audio>
 
@@ -9,19 +9,25 @@
   </a>
 
   <div>
-    <button class="btn btn-outline-secondary btn-navbar" (click)="userInfo()">
+    <button class="btn btn-outline-secondary btn-navbar" (click)="userInfo()" *ngIf="user">
       <i class="fas fa-user-tag"></i>
       Account
     </button>
-    <button class="btn btn-outline-secondary btn-navbar" (click)="signOut()">
+    <button class="btn btn-outline-secondary btn-navbar" (click)="signOut()" *ngIf="user">
       <i class="fas fa-sign-out-alt"></i>
       Log out
+    </button>
+    <button class="btn btn-outline-secondary btn-navbar" (click)="signIn()" *ngIf="!user"routerLink="/login">
+      <i class="fas fa-sign-in-alt"></i>
+      Log in
     </button>
   </div>
 
 </nav>
 
 <div class="container">
+
+  <div id="mapid"></div>
 
   <div id="action-block">
     <div class="form">
@@ -31,34 +37,30 @@
       <input class="form-control action" type="search" placeholder="Search" aria-label="Search"/>
     </div>
 
-    <div class="actions-agent-entretient">
+    <div class="actions-agent-entretient" *ngIf="user">
       <button class="btn btn-outline-success action">
         Waste cleaned up
       </button>
     </div>
 
-    <div class="actions-eco-citoyen">
+    <div class="actions-eco-citoyen" *ngIf="user">
       <button class="btn btn-outline-danger action" (click)="reportWaster()">
         Report a waste
       </button>
     </div>
-
   </div>
 
-  <div id="mapid"></div>
-
-  <div #alertSuccess class="alert alert-success alert-dismissible fade" role="alert">
-    <button type="button" class="close" aria-label="Close" (click)="closeAlertSuccess()">
-      <span aria-hidden="true">&times;</span>
-    </button>
+  <button #alertSuccess type="button" class="alert alert-success alert-dismissible fade waste-alert close" aria-label="Close" (click)="closeAlertSuccess()"  role="alert">
+    <i class="far fa-check-circle"></i>
     Déchet reporté avec succès, merci !
-  </div>
-
-  <div #alertError class="alert alert-danger alert-dismissible fade" role="alert">
-    <button type="button" class="close" aria-label="Close" (click)="closeAlertError()">
-      <span aria-hidden="true">&times;</span>
-    </button>
+  </button>
+  
+  <button #alertError class="alert alert-danger alert-dismissible fade waste-alert close" (click)="closeAlertError()" role="alert">
+    <i class="far fa-check-circle"></i>
     Veuillez sélectionner un points GPS pour reporter un déchet.
-  </div>
+  </button>
 
 </div>
+
+  
+  

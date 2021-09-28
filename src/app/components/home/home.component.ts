@@ -76,8 +76,14 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
     if (this.authService && this.authService.userData) {
       this.user = this.authService.userData;
     }
-  }
 
+    this.mapService.allMarker().subscribe((value: Marker[]) => {
+      console.log(value);
+      value.forEach(m => {
+        L.marker([parseFloat(m.lat), parseFloat(m.lng)], {icon: this.leafIcon}).addTo(this.mymap);
+      });
+    });
+  }
 
   onMapClick(e) {
     this.tmpMarker = e.latlng;
@@ -90,6 +96,9 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
   signOut() {
     this.authService.SignOut();
+  }
+
+  signIn() {
   }
 
   userInfo() {
