@@ -79,7 +79,6 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
     }
   }
 
-
   onMapClick(e) {
     this.tmpMarker = e.latlng;
     console.log(this.tmpMarker);
@@ -91,6 +90,9 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
   signOut() {
     this.authService.SignOut();
+  }
+
+  signIn() {
   }
 
   userInfo() {
