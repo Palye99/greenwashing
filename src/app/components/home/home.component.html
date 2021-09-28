@@ -38,7 +38,7 @@
     </div>
 
     <div class="actions-agent-entretient" *ngIf="user">
-      <button class="btn btn-outline-success action">
+      <button class="btn btn-outline-success action" (click)="cleanWaster()">
         Waste cleaned up
       </button>
     </div>
@@ -53,6 +53,11 @@
   <button #alertSuccess type="button" class="alert alert-success alert-dismissible fade waste-alert close" aria-label="Close" (click)="closeAlertSuccess()"  role="alert">
     <i class="far fa-check-circle"></i>
     Déchet reporté avec succès, merci !
+  </button>
+
+  <button #cleanSuccess type="button" class="alert alert-success alert-dismissible fade waste-alert close" aria-label="Close" (click)="closeCleanSuccess()"  role="alert">
+    <i class="far fa-check-circle"></i>
+    Nettoyage pris en compte, merci !
   </button>
   
   <button #alertError class="alert alert-danger alert-dismissible fade waste-alert close" (click)="closeAlertError()" role="alert">

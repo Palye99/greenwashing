@@ -16,6 +16,7 @@ import {MapService} from "../../services/map.service";
 })
 export class HomeComponent extends DestroyedDirective implements OnInit {
   @ViewChild('alertSuccess', { static: true }) alertSuccess: ElementRef;
+  @ViewChild('cleanSuccess', { static: true }) cleanSuccess: ElementRef;
   @ViewChild('alertError', { static: true }) alertError: ElementRef;
 
   user: User;
@@ -129,8 +130,36 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
     }
   }
 
+  cleanWaster() {
+    if(this.tmpMarker) {
+      L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
+      this.cleanSuccess.nativeElement.classList.add('show');
+
+      const m: Marker = {
+        id: null,
+        name: 'test',
+        desc: 'test',
+        lat: this.tmpMarker.lat,
+        lng: this.tmpMarker.lng,
+        image: null,
+        user: null
+      }
+
+      console.log(m);
+
+      // suppression dans la base
+
+    } else {
+      this.alertError.nativeElement.classList.add('show');
+    }
+  }
+
   closeAlertSuccess() {
     this.alertSuccess.nativeElement.classList.remove('show');
+  }
+
+  closeCleanSuccess() {
+    this.cleanSuccess.nativeElement.classList.remove('show');
   }
 
   closeAlertError() {
