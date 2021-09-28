@@ -1,3 +1,7 @@
+<audio controls autoplay>
+  <source src="./assets/bandol.mp3" type="audio/mpeg">
+</audio>
+
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" routerLink="/home">
     <img src="assets/logo.ico" id="logo" class="d-inline-block" alt="logo"/>
@@ -18,28 +22,43 @@
 </nav>
 
 <div class="container">
-  <div id="mapid"></div>
-  
+
   <div id="action-block">
     <div class="form">
       <button class="btn btn-outline-success action" id="search-btn" type="submit">
         Search
       </button>
-      <input class="form-control action" type="search" placeholder="Search" aria-label="Search"/>  
+      <input class="form-control action" type="search" placeholder="Search" aria-label="Search"/>
+    </div>
+
+    <div class="actions-agent-entretient">
+      <button class="btn btn-outline-success action">
+        Waste cleaned up
+      </button>
+    </div>
+
+    <div class="actions-eco-citoyen">
+      <button class="btn btn-outline-danger action" (click)="reportWaster()">
+        Report a waste
+      </button>
+    </div>
+
   </div>
 
-  <div class="actions-agent-entretient">
-    <button class="btn btn-outline-success action">
-      Waste cleaned up
+  <div id="mapid"></div>
+
+  <div #alertSuccess class="alert alert-success alert-dismissible fade" role="alert">
+    <button type="button" class="close" aria-label="Close" (click)="closeAlertSuccess()">
+      <span aria-hidden="true">&times;</span>
     </button>
+    Déchet reporté avec succès, merci !
   </div>
 
-  <div class="actions-eco-citoyen">
-    <button class="btn btn-outline-danger action">
-      Report a waste
+  <div #alertError class="alert alert-danger alert-dismissible fade" role="alert">
+    <button type="button" class="close" aria-label="Close" (click)="closeAlertError()">
+      <span aria-hidden="true">&times;</span>
     </button>
-  </div>
-
+    Veuillez sélectionner un points GPS pour reporter un déchet.
   </div>
 
 </div>

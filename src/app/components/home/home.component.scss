@@ -1,6 +1,7 @@
 #mapid {
   height: 60vh;
-  width: 100%
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 #logo {
@@ -22,10 +23,15 @@
 
 .action {
   margin-top: 5px;
+  margin-bottom: 5px;
   margin-left: 5px;
   float: right;
 }
 
 .form-control {
   width: 25%;
+}
+
+button {
+  background-color: white;
 }
