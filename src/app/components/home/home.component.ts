@@ -117,25 +117,14 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
     if(this.tmpMarker) {
       const ref = this.dialog.open(AddMarkerComponent);
       ref.componentInstance.tmpMarker = this.tmpMarker;
+      ref.componentInstance.userGreen = this.userGreen;
 
-      ref.afterClosed().subscribe(result => {
+      ref.afterClosed().subscribe((result: Marker) => {
         if(result) {
           L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
           this.alertSuccess.nativeElement.classList.add('show');
 
-          const m: Marker = {
-            id: null,
-            name: 'test',
-            desc: 'test',
-            lat: this.tmpMarker.lat,
-            lng: this.tmpMarker.lng,
-            image: null,
-            user: null
-          }
-
-          console.log(m);
-
-          this.mapService.addMarker(m).subscribe(value => console.log('send db', value));
+          this.mapService.addMarker(result).subscribe(value => console.log('send db', value));
         }
       });
     } else {
@@ -145,21 +134,7 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
   cleanWaster() {
     if(this.tmpMarker) {
-      // L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
       this.cleanSuccess.nativeElement.classList.add('show');
-
-      const m: Marker = {
-        id: null,
-        name: 'test',
-        desc: 'test',
-        lat: this.tmpMarker.lat,
-        lng: this.tmpMarker.lng,
-        image: null,
-        user: null
-      }
-
-      console.log(m);
-
       // suppression dans la base
 
     } else {

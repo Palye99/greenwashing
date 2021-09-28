@@ -1,12 +1,17 @@
 import {Image} from "./image";
-import {User} from "./user";
+import {UserGreen} from "./userGreen";
+import {StatutEnum} from "./statutEnum";
+import {TypeEnum} from "./typeEnum";
 
 export interface Marker {
   id: number;
   name: string;
-  desc: string;
+  description: string;
   lat: string;
   lng: string;
+  dateCreation: Date;
+  statutEnum: StatutEnum;
+  typeEnum: TypeEnum;
   image: Image;
-  user: User;
+  user: UserGreen;
 }

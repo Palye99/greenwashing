@@ -1,0 +1,3 @@
+export enum TypeEnum {
+  ORGANIQUE, VERRE, PLASTIQUE, CARTON_PAPIER, METAL, AUTRE
+}

@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Marker} from "../../models/marker";
 import {MatDialogRef} from "@angular/material/dialog";
+import {UserGreen} from "../../models/userGreen";
+import {StatutEnum} from "../../models/statutEnum";
 
 @Component({
   selector: 'app-add-marker',
@@ -10,6 +12,8 @@ import {MatDialogRef} from "@angular/material/dialog";
 export class AddMarkerComponent implements OnInit {
   @Input()
   tmpMarker: any;
+  @Input()
+  userGreen: UserGreen;
 
   marker: Marker;
   name: string;
@@ -19,13 +23,16 @@ export class AddMarkerComponent implements OnInit {
 
   ngOnInit(): void {
     this.marker = {
+      typeEnum: null,
+      statutEnum: StatutEnum.DECLARE,
       id: null,
       name: '',
-      desc: '',
+      description: '',
+      dateCreation: new Date(),
       lat: this.tmpMarker.lat,
       lng: this.tmpMarker.lng,
       image: null,
-      user: null
+      user: this.userGreen
     }
   }
 
