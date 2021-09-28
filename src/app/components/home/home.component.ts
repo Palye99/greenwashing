@@ -8,7 +8,6 @@ import {DestroyedDirective} from '../../services/destroyed.directive';
 
 import * as L from 'leaflet';
 import {MapService} from "../../services/map.service";
-import {Image} from "../../models/image";
 
 @Component({
   selector: 'app-home',
