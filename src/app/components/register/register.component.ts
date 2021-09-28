@@ -7,6 +7,7 @@ import {AuthService} from '../../services/auth';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  name: string;
   email: string;
   password: any;
 
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
   }
 
   signUp() {
-    this.authService.SignUp(this.email, this.password);
+    this.authService.SignUp(this.name, this.email, this.password);
   }
 
   googleAuth() {

@@ -1,10 +1,13 @@
-import { Injectable, NgZone } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+import {Injectable, NgZone} from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
+import {Router} from '@angular/router';
 import firebase from 'firebase';
-import auth = firebase.auth;
 import {User} from '../models/user';
+import {UserGreen} from "../models/userGreen";
+import {ProfileEnum} from "../models/profileEnum";
+import auth = firebase.auth;
+import {UserService} from "./user.service";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +20,8 @@ export class AuthService {
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private userService: UserService
   ) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
@@ -47,7 +51,17 @@ export class AuthService {
   }
 
   // Sign up with email/password
-  SignUp(email, password) {
+  SignUp(name, email, password) {
+    const u: UserGreen = {
+      id: null,
+      email: email,
+      markers: [],
+      name: name,
+      profileEnum: ProfileEnum.ecocitoyen
+    }
+
+    this.userService.registerUser(u).subscribe(value => console.log('send register 2', value));
+
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign

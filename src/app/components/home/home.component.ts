@@ -130,7 +130,7 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
           console.log(m);
 
-          this.mapService.addMarker(m).subscribe(value => console.log(value));
+          this.mapService.addMarker(m).subscribe(value => console.log('send db', value));
         }
       });
     } else {
@@ -140,7 +140,7 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
   cleanWaster() {
     if(this.tmpMarker) {
-      L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
+      // L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
       this.cleanSuccess.nativeElement.classList.add('show');
 
       const m: Marker = {
