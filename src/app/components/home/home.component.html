@@ -1,7 +1,3 @@
-<audio controls autoplay muted *ngIf="!user">
-  <source src="./assets/bandol.mp3" type="audio/mpeg">
-</audio>
-
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" routerLink="/home">
     <img src="assets/logo.ico" id="logo" class="d-inline-block" alt="logo"/>
@@ -59,7 +55,7 @@
     <i class="far fa-check-circle"></i>
     Nettoyage pris en compte, merci !
   </button>
-  
+
   <button #alertError class="alert alert-danger alert-dismissible fade waste-alert close" (click)="closeAlertError()" role="alert">
     <i class="far fa-check-circle"></i>
     Veuillez sélectionner un points GPS pour reporter un déchet.
