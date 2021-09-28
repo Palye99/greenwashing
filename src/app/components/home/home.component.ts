@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../services/auth';
 import {User} from '../../models/user';
+import {Marker} from '../../models/Marker';
 import {MatDialog} from '@angular/material/dialog';
 import {PopupComponent} from '../popup/popup.component';
-import {DockerService} from '../../services/docker.service';
 import {DestroyedDirective} from '../../services/destroyed.directive';
 
 import * as L from 'leaflet';
+import {MapService} from "../../services/map.service";
+import {Image} from "../../models/image";
 
 @Component({
   selector: 'app-home',
@@ -14,11 +16,23 @@ import * as L from 'leaflet';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent extends DestroyedDirective implements OnInit {
+  @ViewChild('alertSuccess', { static: true }) alertSuccess: ElementRef;
+  @ViewChild('alertError', { static: true }) alertError: ElementRef;
+
   user: User;
   mymap: any;
+  tmpMarker: any;
+  leafIcon = L.icon({
+    iconUrl: '../../../assets/bin.png',
+    iconSize: [35, 40],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+    shadowSize: [68, 95],
+    shadowAnchor: [22, 94]
+  });
 
   constructor(private authService: AuthService,
-              private dockerService: DockerService,
+              private mapService: MapService,
               private dialog: MatDialog) {
     super();
   }
@@ -60,7 +74,6 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
     this.mymap
       .on('click', this.onMapClick, this);
 
-
     if (this.authService && this.authService.userData) {
       this.user = this.authService.userData;
     }
@@ -68,9 +81,11 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
 
   onMapClick(e) {
+    this.tmpMarker = e.latlng;
+    console.log(this.tmpMarker);
     L.popup()
       .setLatLng(e.latlng)
-      .setContent("Coordonnées : " + e.latlng.toString() + `<button class="btn btn-secondary" (click)="userInfo()"><i class="fas fa-user-tag"></i></button>`)
+      .setContent("Coordonnées : " + e.latlng.toString())
       .openOn(this.mymap);
   }
 
@@ -81,5 +96,36 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
   userInfo() {
     const ref = this.dialog.open(PopupComponent);
     console.log('modal info');
+  }
+
+  reportWaster() {
+    if(this.tmpMarker) {
+      L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
+      this.alertSuccess.nativeElement.classList.add('show');
+
+      const m: Marker = {
+        id: null,
+        name: 'test',
+        desc: 'test',
+        lat: this.tmpMarker.lat,
+        lng: this.tmpMarker.lng,
+        image: null,
+        user: null
+      }
+
+      console.log(m);
+
+      this.mapService.addMarker(m).subscribe(value => console.log(value));
+    } else {
+      this.alertError.nativeElement.classList.add('show');
+    }
+  }
+
+  closeAlertSuccess() {
+    this.alertSuccess.nativeElement.classList.remove('show');
+  }
+
+  closeAlertError() {
+    this.alertError.nativeElement.classList.remove('show');
   }
 }
