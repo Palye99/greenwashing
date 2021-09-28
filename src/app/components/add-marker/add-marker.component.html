@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>
+  Déclarer un déchet
+</h1>
+<div class="row">
+  <div class="col-md-2">
+    Name
+  </div>
+  <div class="col-md-4">
+    <input type="text" [(ngModel)]="marker.name">
+  </div>
+  <div class="col-md-2">
+    Coordinate
+  </div>
+  <div class="col-md-4">
+    <input type="text" disabled [value]="marker.lat">
+    <input type="text" disabled [value]="marker.lng">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2">
+    Description
+  </div>
+  <div class="col-md-4">
+    <input type="text" [(ngModel)]="marker.description">
+  </div>
+  <div class="col-md-6">
+    <div class="input-group mb-3">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  Type de déchet
+  <select [(ngModel)]="marker.typeEnum">
+    <option value="0">ORGANIQUE</option>
+    <option value="1">VERRE</option>
+    <option value="2">PLASTIQUE</option>
+    <option value="3">CARTON_PAPIER</option>
+    <option value="4">METAL</option>
+    <option value="5">AUTRE</option>
+  </select>
+</div>
+<div mat-dialog-actions id="box-btn-add-marker">
+  <button mat-button class="btn btn-outline-secondary btn-add-marker" (click)="onNoClick()">No thanks</button>
+  <button mat-button class="btn btn-outline-secondary btn-add-marker" (click)="closeDialog()">Ok</button>
+</div>

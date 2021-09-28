@@ -8,6 +8,10 @@ import {DestroyedDirective} from '../../services/destroyed.directive';
 
 import * as L from 'leaflet';
 import {MapService} from "../../services/map.service";
+import {AddMarkerComponent} from "../add-marker/add-marker.component";
+import {UserService} from "../../services/user.service";
+import {UserGreen} from "../../models/userGreen";
+import {DashboardComponent} from "../dashboard/dashboard.component";
 
 @Component({
   selector: 'app-home',
@@ -16,9 +20,11 @@ import {MapService} from "../../services/map.service";
 })
 export class HomeComponent extends DestroyedDirective implements OnInit {
   @ViewChild('alertSuccess', { static: true }) alertSuccess: ElementRef;
+  @ViewChild('cleanSuccess', { static: true }) cleanSuccess: ElementRef;
   @ViewChild('alertError', { static: true }) alertError: ElementRef;
 
   user: User;
+  userGreen: UserGreen;
   mymap: any;
   tmpMarker: any;
   leafIcon = L.icon({
@@ -32,6 +38,7 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
   constructor(private authService: AuthService,
               private mapService: MapService,
+              private userService: UserService,
               private dialog: MatDialog) {
     super();
   }
@@ -75,10 +82,10 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
     if (this.authService && this.authService.userData) {
       this.user = this.authService.userData;
+      this.userService.getUser(this.user.email).subscribe((value: UserGreen) => { this.userGreen = value; console.log(this.userGreen);});
     }
 
     this.mapService.allMarker().subscribe((value: Marker[]) => {
-      console.log(value);
       value.forEach(m => {
         L.marker([parseFloat(m.lat), parseFloat(m.lng)], {icon: this.leafIcon}).addTo(this.mymap);
       });
@@ -108,22 +115,28 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
   reportWaster() {
     if(this.tmpMarker) {
-      L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
-      this.alertSuccess.nativeElement.classList.add('show');
+      const ref = this.dialog.open(AddMarkerComponent);
+      ref.componentInstance.tmpMarker = this.tmpMarker;
+      ref.componentInstance.userGreen = this.userGreen;
 
-      const m: Marker = {
-        id: null,
-        name: 'test',
-        desc: 'test',
-        lat: this.tmpMarker.lat,
-        lng: this.tmpMarker.lng,
-        image: null,
-        user: null
-      }
+      ref.afterClosed().subscribe((result: Marker) => {
+        if(result) {
+          L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
+          this.alertSuccess.nativeElement.classList.add('show');
 
-      console.log(m);
+          this.mapService.addMarker(result).subscribe(value => console.log('send db', value));
+        }
+      });
+    } else {
+      this.alertError.nativeElement.classList.add('show');
+    }
+  }
 
-      this.mapService.addMarker(m).subscribe(value => console.log(value));
+  cleanWaster() {
+    if(this.tmpMarker) {
+      this.cleanSuccess.nativeElement.classList.add('show');
+      // suppression dans la base
+
     } else {
       this.alertError.nativeElement.classList.add('show');
     }
@@ -133,7 +146,15 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
     this.alertSuccess.nativeElement.classList.remove('show');
   }
 
+  closeCleanSuccess() {
+    this.cleanSuccess.nativeElement.classList.remove('show');
+  }
+
   closeAlertError() {
     this.alertError.nativeElement.classList.remove('show');
+  }
+
+  dashboard() {
+    const ref = this.dialog.open(DashboardComponent, {height:'90%' ,width:'90%'});
   }
 }

@@ -23,14 +23,14 @@
     </div>
     <div class="row">
       <div class="col">
-        <button type="button" class="btn btn-primary m-1 btn-login" id="btn-login" (click)="signIn()">Log in</button>
+        <button type="button" class="btn btn-outline-primary m-1 btn-login" id="btn-login" (click)="signIn()">Log in</button>
       </div>
       <div class="col">
-        <button type="button" routerLink="/password" class="btn btn-secondary btn-login" id="btn-forgot-password">Forgot Password ?</button>
+        <button type="button" routerLink="/password" class="btn btn-outline-secondary btn-login" id="btn-forgot-password">Forgot Password ?</button>
       </div>
     </div>
     <div class="row">
-      <button type="button" class="btn btn-primary btn-login" (click)="signInGoogle()">
+      <button type="button" class="btn btn-outline-primary btn-login" (click)="signInGoogle()">
         <i class="fab fa-google"></i>
         Log in with Google
       </button>
@@ -38,6 +38,6 @@
   </div>
 
   <div class="card-footer">
-    <button type="button" routerLink="/register" class="btn btn-info btn-login">Sign Up</button>
+    <button type="button" routerLink="/register" class="btn btn-outline-primary btn-login">Sign Up</button>
   </div>
 </div>
