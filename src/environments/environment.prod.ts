@@ -8,5 +8,5 @@ export const environment = {
     messagingSenderId: "803347760250",
     appId: "1:803347760250:web:a46918cb8577ac285d67c3"
   },
-  env_api_url: 'http://daytech.me:8080/api',
+  env_api_url: 'http://localhost:8080/api',
 };

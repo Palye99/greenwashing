@@ -77,8 +77,7 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
     //   console.log(coucou);
     // });
 
-    this.mymap
-      .on('click', this.onMapClick, this);
+    this.mymap.on('click', this.onMapClick, this);
 
     if (this.authService && this.authService.userData) {
       this.user = this.authService.userData;
