@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Hi</h1>
+<div mat-dialog-content>
+  name
+  <input type="text">
+  desc
+  <input type="text">
+  Coordonnée
+  <input type="text" disabled [value]="marker.lat">
+  <input type="text" disabled [value]="marker.lng">
+  Photo
+  <input type="file" disabled>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="closeDialog()">Ok</button>
+</div>
+

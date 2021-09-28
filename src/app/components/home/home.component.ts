@@ -8,6 +8,7 @@ import {DestroyedDirective} from '../../services/destroyed.directive';
 
 import * as L from 'leaflet';
 import {MapService} from "../../services/map.service";
+import {AddMarkerComponent} from "../add-marker/add-marker.component";
 
 @Component({
   selector: 'app-home',
@@ -109,7 +110,10 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
   reportWaster() {
     if(this.tmpMarker) {
-      L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
+      const ref = this.dialog.open(AddMarkerComponent);
+      ref.componentInstance.tmpMarker = this.tmpMarker;
+
+      // L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
       this.alertSuccess.nativeElement.classList.add('show');
 
       const m: Marker = {
