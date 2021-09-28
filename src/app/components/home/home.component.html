@@ -5,6 +5,10 @@
   </a>
 
   <div>
+    <button class="btn btn-outline-secondary btn-navbar" (click)="dashboard()" *ngIf="user && userGreen.profileEnum.toString() === 'mairie'">
+      <i class="fas fa-chart-line"></i>
+      dashboard
+    </button>
     <button class="btn btn-outline-secondary btn-navbar" (click)="userInfo()" *ngIf="user">
       <i class="fas fa-user-tag"></i>
       Account

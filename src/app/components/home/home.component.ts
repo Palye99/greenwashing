@@ -11,6 +11,7 @@ import {MapService} from "../../services/map.service";
 import {AddMarkerComponent} from "../add-marker/add-marker.component";
 import {UserService} from "../../services/user.service";
 import {UserGreen} from "../../models/userGreen";
+import {DashboardComponent} from "../dashboard/dashboard.component";
 
 @Component({
   selector: 'app-home',
@@ -81,11 +82,10 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
     if (this.authService && this.authService.userData) {
       this.user = this.authService.userData;
-      this.userService.getUser(this.user.email).subscribe((value: UserGreen) => this.userGreen = value);
+      this.userService.getUser(this.user.email).subscribe((value: UserGreen) => { this.userGreen = value; console.log(this.userGreen);});
     }
 
     this.mapService.allMarker().subscribe((value: Marker[]) => {
-      console.log(value);
       value.forEach(m => {
         L.marker([parseFloat(m.lat), parseFloat(m.lng)], {icon: this.leafIcon}).addTo(this.mymap);
       });
@@ -152,5 +152,9 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
   closeAlertError() {
     this.alertError.nativeElement.classList.remove('show');
+  }
+
+  dashboard() {
+    const ref = this.dialog.open(DashboardComponent, {height:'90%' ,width:'90%'});
   }
 }

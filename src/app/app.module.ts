@@ -25,6 +25,7 @@ import {NgTerminalModule} from 'ng-terminal';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AddMarkerComponent } from './components/add-marker/add-marker.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AddMarkerComponent } from './components/add-marker/add-marker.component
     EmailComponent,
     PopupComponent,
     HomeComponent,
-    AddMarkerComponent
+    AddMarkerComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
