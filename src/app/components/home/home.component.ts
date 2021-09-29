@@ -12,6 +12,7 @@ import {AddMarkerComponent} from "../add-marker/add-marker.component";
 import {UserService} from "../../services/user.service";
 import {UserGreen} from "../../models/userGreen";
 import {DashboardComponent} from "../dashboard/dashboard.component";
+import {UpdateMarkerComponent} from "../update-marker/update-marker.component";
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,8 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
   userGreen: UserGreen;
   mymap: any;
   tmpMarker: any;
+  tmpMarkerUpdate: any;
+  allMarker: Marker[];
   leafIcon = L.icon({
     iconUrl: '../../../assets/bin.png',
     iconSize: [35, 40],
@@ -85,10 +88,15 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
     }
 
     this.mapService.allMarker().subscribe((value: Marker[]) => {
+      this.allMarker = value;
       value.forEach(m => {
-        L.marker([parseFloat(m.lat), parseFloat(m.lng)], {icon: this.leafIcon}).addTo(this.mymap);
+        L.marker([parseFloat(m.lat), parseFloat(m.lng)], {icon: this.leafIcon}).addTo(this.mymap).on('click', this.onCursorClick, this);
       });
     });
+  }
+
+  onCursorClick(e) {
+    this.tmpMarkerUpdate = this.allMarker.find(value => value.lat === e.latlng.lat.toString() && value.lng === e.latlng.lng.toString());
   }
 
   onMapClick(e) {
@@ -120,10 +128,10 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
 
       ref.afterClosed().subscribe((result: Marker) => {
         if(result) {
-          L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap);
+          L.marker(this.tmpMarker, {icon: this.leafIcon}).addTo(this.mymap).on('click', this.onCursorClick, this);
           this.alertSuccess.nativeElement.classList.add('show');
 
-          this.mapService.addMarker(result).subscribe(value => console.log('send db', value));
+          this.mapService.saveMarker(result).subscribe(value => console.log('send db', value));
         }
       });
     } else {
@@ -132,10 +140,17 @@ export class HomeComponent extends DestroyedDirective implements OnInit {
   }
 
   cleanWaster() {
-    if(this.tmpMarker) {
-      this.cleanSuccess.nativeElement.classList.add('show');
-      // suppression dans la base
+    if(this.tmpMarkerUpdate) {
+      const ref = this.dialog.open(UpdateMarkerComponent);
+      ref.componentInstance.tmpMarkerUpdate = this.tmpMarkerUpdate;
 
+      ref.afterClosed().subscribe((result: Marker) => {
+        if(result) {
+          this.cleanSuccess.nativeElement.classList.add('show');
+          console.log('result', result);
+          this.mapService.saveMarker(result).subscribe(value => console.log('send db', value));
+        }
+      });
     } else {
       this.alertError.nativeElement.classList.add('show');
     }

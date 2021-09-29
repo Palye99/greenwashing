@@ -37,7 +37,7 @@
       <input class="form-control action" type="search" placeholder="Search" aria-label="Search"/>
     </div>
 
-    <div class="actions-agent-entretient" *ngIf="user">
+    <div class="actions-agent-entretient" *ngIf="user && userGreen && userGreen.profileEnum.toString() == 'servicepublic'">
       <button class="btn btn-outline-success action" (click)="cleanWaster()">
         Waste cleaned up
       </button>

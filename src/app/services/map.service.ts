@@ -9,9 +9,8 @@ import {Marker} from "../models/marker";
 export class MapService {
 
   constructor(private http: HttpClient) { }
-
-  addMarker(m: Marker) {
-    return this.http.post(`${environment.env_api_url}/map/addMarker`, m);
+  saveMarker(m: Marker) {
+    return this.http.post(`${environment.env_api_url}/map/saveMarker`, m);
   }
 
   allMarker() {

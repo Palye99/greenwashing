@@ -6,14 +6,14 @@
     Name
   </div>
   <div class="col-md-4">
-    <input type="text" [(ngModel)]="marker.name">
+    <input type="text" [(ngModel)]="tmpMarkerUpdate.name">
   </div>
   <div class="col-md-2">
     Coordinate
   </div>
   <div class="col-md-4">
-    <input type="text" disabled [value]="marker.lat">
-    <input type="text" disabled [value]="marker.lng">
+    <input type="text" disabled [value]="tmpMarkerUpdate.lat">
+    <input type="text" disabled [value]="tmpMarkerUpdate.lng">
   </div>
 </div>
 <div class="row">
@@ -21,7 +21,7 @@
     Description
   </div>
   <div class="col-md-4">
-    <input type="text" [(ngModel)]="marker.description">
+    <input type="text" [(ngModel)]="tmpMarkerUpdate.description">
   </div>
   <div class="col-md-6">
     <div class="input-group mb-3">
@@ -33,13 +33,21 @@
 </div>
 <div class="row">
   Type de déchet
-  <select [(ngModel)]="marker.typeEnum">
+  <select [(ngModel)]="typeEnum">
     <option [ngValue]="0">ORGANIQUE</option>
     <option [ngValue]="1">VERRE</option>
     <option [ngValue]="2">PLASTIQUE</option>
     <option [ngValue]="3">CARTON_PAPIER</option>
     <option [ngValue]="4">METAL</option>
     <option [ngValue]="5">AUTRE</option>
+  </select>
+</div>
+<div class="row">
+  Statut
+  <select [(ngModel)]="statutEnum">
+    <option [ngValue]="0">DECALRE</option>
+    <option [ngValue]="1">IN PROGRESS</option>
+    <option [ngValue]="2">DONE</option>
   </select>
 </div>
 <div mat-dialog-actions id="box-btn-add-marker">
